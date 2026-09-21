@@ -1,8 +1,8 @@
 # Chromosome-anchored DArTseq genotyping reveals genetic architecture and cryptic duplicates in an African yam bean diversity panel
 
-Analysis code and result tables/figures for a 95-line *Sphenostylis stenocarpa* (African yam bean) DArTseq diversity panel re-anchored to the chromosome-scale *S. stenocarpa* reference genome. Covers QC and PCA, ADMIXTURE, AMOVA, F_ST, genome-wide and per-chromosome LD decay, maximum-likelihood phylogenies (IQ-TREE 2 and RAxML-NG), pcadapt and DAPC selection scans, the VanRaden genomic relationship matrix with cryptic-duplicate detection, F_IS and runs of homozygosity, SilicoDArT cross-marker-system validation, and an inbreeding-normalized cross shortlist.
+Analysis code and result tables for a 95-line *Sphenostylis stenocarpa* (African yam bean) DArTseq diversity panel re-anchored to the chromosome-scale *S. stenocarpa* reference genome. Covers QC and PCA, ADMIXTURE, AMOVA, F_ST, genome-wide and per-chromosome LD decay, maximum-likelihood phylogenies (IQ-TREE 2 and RAxML-NG), pcadapt and DAPC selection scans, the VanRaden genomic relationship matrix with cryptic-duplicate detection, F_IS and runs of homozygosity, SilicoDArT cross-marker-system validation, and an inbreeding-normalized cross shortlist.
 
-This repository contains the **analysis code and derived result tables/figures** for
+This repository contains the **analysis code and derived result tables** for
 the study. Raw genotype and phenotype data are archived separately (see Data below);
 manuscript drafts are not included.
 
@@ -10,7 +10,7 @@ manuscript drafts are not included.
 
 ```
 scripts/    numbered Python and R analysis scripts (shared helpers: _plotstyle, _pheno, _figstyle)
-results/    one directory per analysis stage, each with figures/, tables/, and a README.md
+results/    one directory per analysis stage, each with tables/ and a README.md
             documenting method, inputs, outputs, findings, and caveats
 refs/       machine-learning best-practice reference material
 ```
