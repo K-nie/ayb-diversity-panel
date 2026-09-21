@@ -4,8 +4,47 @@
   "creators": [
     {
       "name": "Narh-Madey, Benjamin",
-      "affiliation": "Department of Genetics, University of Wisconsin-Madison",
-      "orcid": ""
+      "affiliation": "Laboratory of Genetics, Wisconsin Energy Institute, J.F. Crow Institute for the Study of Evolution, University of Wisconsin-Madison, Madison, WI, USA"
+    },
+    {
+      "name": "Adewale, Daniel B.",
+      "affiliation": "Department of Crop Science and Horticulture, Federal University Oye-Ekiti, Ekiti State, Nigeria"
+    },
+    {
+      "name": "Odesina, Ifeoluwa Simeon",
+      "affiliation": "Universidade Estadual do Norte Fluminense Darcy Ribeiro, Campos dos Goytacazes, Rio de Janeiro, Brazil"
+    },
+    {
+      "name": "Utoblo, Obaiya Grace",
+      "affiliation": "Department of Plant Science and Biotechnology, University of Jos, Jos, Nigeria"
+    },
+    {
+      "name": "Donkor, Esther Fobi",
+      "affiliation": "School of Agricultural Technology, Department of Horticulture and Crop Production, University of Energy and Natural Resources, Sunyani, Bono Region, Ghana"
+    },
+    {
+      "name": "Komolafe, Ronke Justina",
+      "affiliation": "Department of Plant Science and Biotechnology, Federal University Oye-Ekiti, Oye-Ekiti, Ekiti State, Nigeria"
+    },
+    {
+      "name": "Banla, Essohouna Modom",
+      "affiliation": "Centre de Recherche Agronomique de la Savane Seche (CRASS), Institut Togolais de Recherche Agronomique (ITRA), Lome, Togo"
+    },
+    {
+      "name": "Buernor, Alfred Balenor",
+      "affiliation": "Nkabom Collaborative, University of Ghana, Legon, Accra, Ghana"
+    },
+    {
+      "name": "Adzovie, Joy",
+      "affiliation": "School of Biological Sciences, Faculty of Environmental and Life Sciences, University of Southampton, Southampton, UK"
+    },
+    {
+      "name": "Nasser, Yao Kouadio",
+      "affiliation": "Biosciences Eastern and Central Africa - International Livestock Research Institute (BecA-ILRI) Hub, Nairobi, Kenya"
+    },
+    {
+      "name": "Abberton, Michael T.",
+      "affiliation": "Genetic Resources Centre, International Institute of Tropical Agriculture, Ibadan, Oyo State, Nigeria"
     }
   ],
   "upload_type": "software",
