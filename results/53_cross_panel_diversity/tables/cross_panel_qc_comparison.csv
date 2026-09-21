@@ -1,0 +1,4 @@
+panel,n_accessions,n_raw_snps,n_postqc_snps,qc_call_rate_min,qc_maf_min,qc_maf_max,post_qc_retention_pct,source
+This panel (n=95),95,3204,1625,0.9,0.05,,50.717852684144816,"this panel (Narh-Madey, scripts 01-13)"
+Shitta 2022 (n=169),169,7930,1789,0.8,0.05,0.95,22.559899117276167,Sci Rep 12:4437 (PMC8924269); Tables 2-4 + Results
+Olomitutu 2022 (n=195),195,5416,2491,0.7,0.01,,45.993353028064995,Genes 13:2350 (PMC9777823); Results 3.2

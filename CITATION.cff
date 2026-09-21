@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this analysis code or its outputs, please cite this repository and the accompanying manuscript."
+type: software
+title: "Chromosome-anchored DArTseq genotyping reveals genetic architecture and cryptic duplicates in an African yam bean diversity panel"
+authors:
+  - family-names: "Narh-Madey"
+    given-names: "Benjamin"
+    email: "narhmadey@wisc.edu"
+    affiliation: "Department of Genetics, University of Wisconsin-Madison"
+keywords:
+  - "African yam bean"
+  - "Sphenostylis stenocarpa"
+  - "DArTseq"
+  - "diversity panel"
+  - "population structure"
+  - "AMOVA"
+  - "runs of homozygosity"
+  - "cryptic duplicates"
+  - "pcadapt"
+  - "phylogenetics"
+  - "underutilised legume"
+license: "MIT"
+repository-code: "https://github.com/K-nie/ayb-diversity-panel"
+url: "https://github.com/K-nie/ayb-diversity-panel"

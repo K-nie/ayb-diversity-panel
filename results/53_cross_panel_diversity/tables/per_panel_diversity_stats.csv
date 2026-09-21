@@ -1,0 +1,17 @@
+statistic,this_panel_n95,Shitta_2022_n169,Olomitutu_2022_n195
+n accessions,95.0,169.0,195.0
+Raw SNPs,3204.0,7930.0,5416.0
+Post-QC SNPs,1625.0,1789.0,2491.0
+QC: call rate floor,0.9,0.8,0.7
+QC: MAF floor,0.05,0.05,0.01
+Mean MAF,0.2297090404346241,0.22,0.16
+Mean observed heterozygosity,0.2970688359872214,0.15,0.15
+Mean PIC,0.257572757250373,,
+"Mean n_e (effective alleles per locus, Kimura-Crow)",1.524632467484513,1.61,
+Wright F_IS,0.011,,
+Pairwise F_ST (between subpops) -- low,0.165,0.14,
+Pairwise F_ST (between subpops) -- high,0.165,0.39,
+AMOVA among-populations %,27.3,13.0,
+ADMIXTURE optimal K,3.0,3.0,
+LD half-decay (kb),73.85,,
+LD-based effective population size (Ne),659.0,,

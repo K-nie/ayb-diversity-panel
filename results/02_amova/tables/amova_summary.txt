@@ -1,0 +1,24 @@
+AMOVA on AYB DArTseq dosage matrix
+==================================
+N samples: 95
+Groups: 2
+Group sizes: [11, 84]
+Filtered markers: 1625
+Group source: K-means k=2 from PCA (script 01)
+
+Phi_ST (observed): 0.2878
+% variance among groups: 28.78
+% variance within groups: 71.22
+
+Pseudo-F (MS_among / MS_within): 8.8615
+
+Permutations: 999
+Null mean Phi_ST: 0.0034
+Null max  Phi_ST: 0.1026
+Empirical p-value (Phi_ST):    0.0010
+Empirical p-value (pseudo-F):  0.0010
+
+Caveat: groups are derived from PCA of the same dosage matrix, so
+AMOVA here quantifies the structure visible in PCA rather than
+offering independent evidence. Re-run with provenance / geographic
+metadata when supplied by Prof. Adewale.

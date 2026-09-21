@@ -1,0 +1,2 @@
+n_members,members,representative,dropped,G_ij_pairs,G_ij_min,G_ij_max,clusters
+3,TSs151B;TSs358;TSs361,TSs151B,TSs358;TSs361,TSs151B-TSs358=1.600;TSs151B-TSs361=1.600;TSs358-TSs361=1.609,1.599598434540323,1.6094920083442683,0

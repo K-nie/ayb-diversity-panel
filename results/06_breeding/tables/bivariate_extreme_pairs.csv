@@ -1,0 +1,20 @@
+sample,category,Antioxidant,Flavonoid,Tannin,Phenol
+TSs15,high Antioxidant x high Flavonoid,362.51226510195,170.902269328135,,
+TSs201,high Antioxidant x high Flavonoid,352.260513615858,204.841386725877,,
+TSs22A,low Tannin x high Antioxidant,387.768804477413,,367.109111440282,
+TSs22A,high Antioxidant x high Flavonoid,387.768804477413,173.770799494423,,
+TSs22B,high Antioxidant x high Flavonoid,340.914839953828,164.569163733639,,
+TSs293,high Antioxidant x high Flavonoid,350.34483635561,213.310771973677,,
+TSs297,high Antioxidant x high Flavonoid,402.584292348072,193.029675638371,,
+TSs3,high Antioxidant x high Flavonoid,427.941033817738,161.399050648578,,
+TSs311,low Phenol x high Flavonoid,,164.311975400378,,123.714212989216
+TSs346,high Antioxidant x high Flavonoid,374.874932959537,203.732177235388,,
+TSs365,low Phenol x high Flavonoid,,164.491123414755,,124.615855243755
+TSs368,low Tannin x high Antioxidant,342.723974632529,,376.423898803709,
+TSs368,high Antioxidant x high Flavonoid,342.723974632529,181.132879223169,,
+TSs49A,low Tannin x high Antioxidant,362.173006559779,,341.331811217012,
+TSs53,high Antioxidant x high Flavonoid,377.2998781041,233.482231697613,,
+TSs56A,high Antioxidant x high Flavonoid,373.31739476693,192.578043545976,,
+TSs5A,low Tannin x high Antioxidant,378.175733636011,,337.484804011403,
+TSs95,low Phenol x high Flavonoid,,157.626669807959,,103.771931691614
+TSs98,high Antioxidant x high Flavonoid,376.805060174128,171.197251768599,,

@@ -1,0 +1,2 @@
+estimator,global_fst,boot_ci95_low,boot_ci95_high,n_loci_used,n_pops,n_total,n_per_pop,caveat
+Weir & Cockerham 1984 (ratio of sums),0.16540904218152178,0.1551074084525,0.17553953586016344,1625,2,95,11;84,"Cluster labels were learned by k-means on PCA of the same SNPs; F_ST is therefore descriptive of the partition, not an independent test of differentiation."

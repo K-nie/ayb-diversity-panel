@@ -1,0 +1,11 @@
+metric,value
+post-QC individuals n,95.0
+post-QC markers m,1625.0
+sample-size ceiling n-1,94.0
+m_eff full panel (Li & Ji),92.4
+m_eff / (n-1) ceiling ratio,0.983
+m_eff after destroying all LD (permuted),94.0
+Bonferroni at m_eff (submitted),0.0005409748072183258
+Bonferroni at true marker count m,3.076923076923077e-05
+-log10 Bonferroni at m_eff,3.27
+-log10 Bonferroni at m,4.51

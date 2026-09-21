@@ -1,0 +1,50 @@
+{
+  "title": "Chromosome-anchored DArTseq genotyping reveals genetic architecture and cryptic duplicates in an African yam bean diversity panel",
+  "description": "Analysis code and result tables/figures for a 95-line Sphenostylis stenocarpa (African yam bean) DArTseq diversity panel re-anchored to the chromosome-scale S. stenocarpa reference genome. Covers QC and PCA, ADMIXTURE, AMOVA, F_ST, genome-wide and per-chromosome LD decay, maximum-likelihood phylogenies (IQ-TREE 2 and RAxML-NG), pcadapt and DAPC selection scans, the VanRaden genomic relationship matrix with cryptic-duplicate detection, F_IS and runs of homozygosity, SilicoDArT cross-marker-system validation, and an inbreeding-normalized cross shortlist.",
+  "creators": [
+    {
+      "name": "Narh-Madey, Benjamin",
+      "affiliation": "Department of Genetics, University of Wisconsin-Madison",
+      "orcid": ""
+    }
+  ],
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": [
+    "African yam bean",
+    "Sphenostylis stenocarpa",
+    "DArTseq",
+    "diversity panel",
+    "population structure",
+    "AMOVA",
+    "runs of homozygosity",
+    "cryptic duplicates",
+    "pcadapt",
+    "phylogenetics",
+    "underutilised legume"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/K-nie/ayb-diversity-panel",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.13853757",
+      "relation": "isDerivedFrom",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "10.5281/zenodo.20348832",
+      "relation": "isDerivedFrom",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://www.ebi.ac.uk/ena/browser/view/PRJEB57813",
+      "relation": "isDerivedFrom",
+      "resource_type": "dataset"
+    }
+  ],
+  "notes": "Author under .creators is the code-side author. Manuscript co-authorship (Prof. B.D. Adewale and collaborators) is recorded on manuscript publication."
+}

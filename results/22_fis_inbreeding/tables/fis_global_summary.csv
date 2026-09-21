@@ -1,0 +1,2 @@
+estimator,global_FIS,boot_ci95_low,boot_ci95_high,n_loci_used,n_samples,interpretation
+Wright 1969 F_IS (ratio of sums),0.011229316605421962,0.002871699280963486,0.019780288845851462,1625,95,Sphenostylis stenocarpa is highly autogamous (selfer); F_IS > 0.5 is expected and indicates strong heterozygosity deficit relative to Hardy-Weinberg.

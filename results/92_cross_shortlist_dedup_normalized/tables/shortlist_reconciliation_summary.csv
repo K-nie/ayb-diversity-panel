@@ -1,0 +1,12 @@
+metric,value
+panel size submitted,95
+panel size after dedup,93
+duplicate lines dropped,TSs358;TSs361
+duplicate representative kept,TSs151B
+submitted shortlist pairs involving a trio member,32
+submitted shortlist pairs involving a DROPPED duplicate,21
+new shortlist pairs involving a DROPPED duplicate,0
+shortlist pairs shared (submitted ∩ new),17
+shortlist pairs replaced,33
+new normalized r_ij min,-0.2368
+new normalized r_ij max,-0.1818
