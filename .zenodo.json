@@ -1,6 +1,6 @@
 {
   "title": "Chromosome-anchored DArTseq genotyping reveals genetic architecture and cryptic duplicates in an African yam bean diversity panel",
-  "description": "Analysis code and result tables/figures for a 95-line Sphenostylis stenocarpa (African yam bean) DArTseq diversity panel re-anchored to the chromosome-scale S. stenocarpa reference genome. Covers QC and PCA, ADMIXTURE, AMOVA, F_ST, genome-wide and per-chromosome LD decay, maximum-likelihood phylogenies (IQ-TREE 2 and RAxML-NG), pcadapt and DAPC selection scans, the VanRaden genomic relationship matrix with cryptic-duplicate detection, F_IS and runs of homozygosity, SilicoDArT cross-marker-system validation, and an inbreeding-normalized cross shortlist.",
+  "description": "Analysis code and result tables for a 95-line Sphenostylis stenocarpa (African yam bean) DArTseq diversity panel re-anchored to the chromosome-scale S. stenocarpa reference genome. Covers QC and PCA, ADMIXTURE, AMOVA, F_ST, genome-wide and per-chromosome LD decay, maximum-likelihood phylogenies (IQ-TREE 2 and RAxML-NG), pcadapt and DAPC selection scans, the VanRaden genomic relationship matrix with cryptic-duplicate detection, F_IS and runs of homozygosity, SilicoDArT cross-marker-system validation, and an inbreeding-normalized cross shortlist.",
   "creators": [
     {
       "name": "Narh-Madey, Benjamin",
