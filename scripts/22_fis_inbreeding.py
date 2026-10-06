@@ -171,7 +171,10 @@ f_df = pd.DataFrame({
     "H_obs": H_obs_i,
     "H_exp": H_exp_i,
     "F": F_ind,
-    "cluster": clu + 1,
+    # Standardised convention: main cluster (pca==1, n=84) -> Cluster 1;
+    # minor cluster (pca==0, n=11) -> Cluster 2. Matches F_ST/attribution
+    # figures and Table 3 (R2-C numbering fix).
+    "cluster": 2 - clu,
 }).sort_values("F", ascending=False)
 f_df.to_csv(TAB / "f_per_accession.csv", index=False)
 print(f"[F-ind] median individual F = {np.nanmedian(F_ind):.3f}, "
@@ -222,8 +225,8 @@ ax.set_xticklabels(["1", str(len(sorted_f) // 4 + 1),
                     str(len(sorted_f))], fontsize=9)
 ax.set_xlabel("Accession rank (descending F)")
 ax.set_ylabel(r"individual inbreeding F")
-ax.set_title(f"Per-accession F (Yang 2010 method I) -- "
-             f"{len(sorted_f)} lines, ranked by F descending")
+ax.text(-0.10, 1.03, "a", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 
 # Top-6 highest-F and top-6 lowest-F accessions get adjustText labels
 extreme_idx = np.concatenate([np.arange(6),

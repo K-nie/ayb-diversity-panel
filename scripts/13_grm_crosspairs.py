@@ -152,8 +152,8 @@ for ax in (ax_top, ax_left):
     ax.set_xticks([]); ax.set_yticks([])
 cb_ax = fig.add_axes([0.93, 0.13, 0.018, 0.55])
 fig.colorbar(im, cax=cb_ax, label=r"G$_{ij}$ (VanRaden method 1)")
-fig.suptitle("Genomic relationship matrix — reordered by UPGMA on (1 - G)",
-             y=0.94, fontsize=12)
+ax_left.text(-0.5, 1.04, "a", transform=ax_left.transAxes,
+             fontsize=14, fontweight="bold", va="bottom", ha="right")
 fig.savefig(FIG / "fig31_grm_heatmap.png", dpi=300, bbox_inches="tight")
 fig.savefig(FIG / "fig31_grm_heatmap.pdf", bbox_inches="tight")
 plt.close(fig)
@@ -176,7 +176,8 @@ ax.axvline(g_off.mean(), color="black", linewidth=1.0,
            label=f"overall mean = {g_off.mean():.3f}")
 ax.set_xlabel(r"G$_{ij}$ (off-diagonal entries)")
 ax.set_ylabel("count of pairs")
-ax.set_title("Distribution of genomic relationships across the panel")
+ax.text(-0.10, 1.03, "b", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 ax.legend(loc="upper right")
 ax.grid(True, axis="y")
 save(fig, "fig32_grm_offdiag_distribution")

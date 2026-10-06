@@ -125,7 +125,7 @@ Z = linkage(condensed, method="average")
 # Group labels from PCA k=2 clustering
 pca_tab = pd.read_csv(PCA_TAB).set_index("sample").loc[samples]
 groups = pca_tab["cluster"].astype(int).values
-g_color = [CLUSTER_PAL[g] for g in groups]
+g_color = [CLUSTER_PAL[1 - g] for g in groups]
 
 
 # ---------------------------------------------------------------------------
@@ -147,12 +147,10 @@ sample_to_group = dict(zip(samples, g_color))
 for tick in xt:
     tick.set_color(sample_to_group.get(tick.get_text(), "black"))
 ax.set_ylabel("Rogers' modified distance")
-ax.set_title(f"UPGMA dendrogram — 105 Nigerian AYB lines, {L:,} QC SNPs\n"
-             f"leaf colour = PCA k-means cluster")
 # legend
 import matplotlib.patches as mpatches
-handles = [mpatches.Patch(color=CLUSTER_PAL[k],
-                          label=f"Cluster {k + 1}  (n = {(groups == k).sum()})")
+handles = [mpatches.Patch(color=CLUSTER_PAL[1 - k],
+                          label=f"Cluster {2 - k}  (n = {(groups == k).sum()})")
            for k in sorted(set(groups))]
 ax.legend(handles=handles, loc="upper right", frameon=False)
 save(fig, "fig15_dendrogram_upgma")
@@ -219,7 +217,7 @@ for icoord, dcoord in zip(dd_polar["icoord"], dd_polar["dcoord"]):
 for i, lab in enumerate(leaf_order_polar):
     theta_i = 2.0 * np.pi * i / N
     g = groups[samples.index(lab)]
-    ax_r.scatter(theta_i, 0, s=22, color=CLUSTER_PAL[g],
+    ax_r.scatter(theta_i, 0, s=22, color=CLUSTER_PAL[1 - g],
                  edgecolor="white", linewidth=0.4, zorder=5)
     # tip labels — small, rotated to read radially
     rot_deg = np.degrees(theta_i)
@@ -231,7 +229,7 @@ for i, lab in enumerate(leaf_order_polar):
     ax_r.text(theta_i, max(D.max() * 1.04, 0.05), lab,
               rotation=rot_deg, rotation_mode="anchor",
               fontsize=5, ha=ha, va="center",
-              color=CLUSTER_PAL[g])
+              color=CLUSTER_PAL[1 - g])
 
 ax_r.set_theta_zero_location("N")
 ax_r.set_theta_direction(-1)
@@ -240,11 +238,9 @@ ax_r.set_rlim(0, D.max() * 1.12)
 ax_r.set_yticklabels([])
 ax_r.set_xticklabels([])
 ax_r.grid(True, alpha=0.25)
-ax_r.set_title(f"Circular UPGMA dendrogram — {N} AYB lines, {L:,} QC SNPs",
-               fontsize=11, pad=18)
 # legend
-handles = [mpatches.Patch(color=CLUSTER_PAL[k],
-                          label=f"Cluster {k + 1}  (n = {(groups == k).sum()})")
+handles = [mpatches.Patch(color=CLUSTER_PAL[1 - k],
+                          label=f"Cluster {2 - k}  (n = {(groups == k).sum()})")
            for k in sorted(set(groups))]
 ax_r.legend(handles=handles, loc="lower right",
             bbox_to_anchor=(1.05, -0.05), frameon=False, fontsize=9)
@@ -278,23 +274,21 @@ ax_main.set_ylabel("Lines (UPGMA leaf order)")
 
 # group color bars
 for ax, axis in [(ax_top, 0), (ax_left, 1)]:
-    cb = np.array([[CLUSTER_PAL[g] for g in g_ord]])
+    cb = np.array([[CLUSTER_PAL[1 - g] for g in g_ord]])
     if axis == 0:
         ax.imshow([list(range(len(g_ord)))], aspect="auto",
                   cmap=plt.matplotlib.colors.ListedColormap(
-                      [CLUSTER_PAL[g] for g in g_ord]))
+                      [CLUSTER_PAL[1 - g] for g in g_ord]))
     else:
         ax.imshow(np.arange(len(g_ord))[:, None], aspect="auto",
                   cmap=plt.matplotlib.colors.ListedColormap(
-                      [CLUSTER_PAL[g] for g in g_ord]))
+                      [CLUSTER_PAL[1 - g] for g in g_ord]))
     ax.set_xticks([]); ax.set_yticks([])
 
 # colorbar
 cb_ax = fig.add_axes([0.92, 0.13, 0.018, 0.55])
 fig.colorbar(im, cax=cb_ax, label="Rogers' distance")
 
-fig.suptitle("Pairwise genetic distance — reordered by UPGMA linkage",
-             y=0.94, fontsize=12)
 fig.savefig(FIG / "fig16_distance_heatmap.png", dpi=300, bbox_inches="tight")
 fig.savefig(FIG / "fig16_distance_heatmap.pdf", bbox_inches="tight")
 plt.close(fig)

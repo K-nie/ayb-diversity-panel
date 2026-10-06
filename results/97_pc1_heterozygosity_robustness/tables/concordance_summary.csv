@@ -1,0 +1,13 @@
+metric,value,p
+PC1_baseline_vs_obs_het_pearson_r,-0.5868634592199632,4.1032124851256054e-10
+PC1_baseline_vs_obs_het_spearman_rho,-0.46944288913773796,1.5947088733227622e-06
+PC1_variance_explained_by_het_R2,0.3444087197676214,
+haploid_PCA_ARI_vs_baseline_kmeans,0.8649877146282249,
+IBS_PCoA_ARI_vs_baseline_kmeans,0.5707562636936789,
+PC1_baseline_vs_haploid_pearson_r,0.8740206400503258,
+PC1_baseline_vs_IBS_pearson_r,0.8786773382558936,
+residual_het_fraction_after_haploidisation,0.0,
+mean_obs_het_minor,0.08554240484685215,
+mean_obs_het_main,0.3407395733654449,
+n_markers_baseline,1625.0,
+n_markers_haploid_nonzerovar,1429.0,

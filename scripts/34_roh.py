@@ -205,7 +205,10 @@ for samp in samples:
     f_rows.append(row)
 f_df = pd.DataFrame(f_rows)
 pca = pd.read_csv(PCA_CSV).set_index("sample").reindex(samples)
-f_df["cluster"] = (pca["cluster"].astype(int) + 1).values
+# Standardised convention: main cluster (pca==1, n=84) -> Cluster 1;
+# minor cluster (pca==0, n=11) -> Cluster 2. Matches F_ST/attribution
+# figures and Table 3 (R2-C numbering fix).
+f_df["cluster"] = (2 - pca["cluster"].astype(int)).values
 f_df = f_df.sort_values("F_ROH_ge_1.0Mb", ascending=False)
 f_df.to_csv(TAB / "f_roh_per_sample.csv", index=False)
 
@@ -224,8 +227,8 @@ ax.hist(roh_df["length_kb"], bins=40, color=WONG["blue"],
         edgecolor="white", linewidth=0.4)
 ax.set_xlabel("ROH segment length (kb)")
 ax.set_ylabel("number of segments")
-ax.set_title(f"ROH segment length distribution "
-             f"({len(roh_df):,} segments across {len(samples)} accessions)")
+ax.text(-0.10, 1.03, "b", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 ax.axvline(1000, color="black", linewidth=0.6, linestyle="--",
            label="1 Mb cutoff")
 ax.axvline(5000, color="grey", linewidth=0.6, linestyle=":",
@@ -260,8 +263,8 @@ ax.set_xticklabels(["1", str(len(sorted_f) // 4 + 1),
                     str(len(sorted_f))], fontsize=9)
 ax.set_xlabel("Accession rank (descending F$_{ROH}$)")
 ax.set_ylabel(r"F$_{ROH}$ (>= 1 Mb ROH / AYB-anchored genome span)")
-ax.set_title(f"Per-accession F$_{{ROH}}$ (>= 1 Mb segments) -- selfer-paper "
-             f"individual-inbreeding measure ({len(sorted_f)} accessions)")
+ax.text(-0.06, 1.03, "c", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 
 extreme_idx = np.concatenate([np.arange(6),
                               np.arange(len(sorted_f) - 6, len(sorted_f))])

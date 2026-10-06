@@ -100,9 +100,8 @@ for ax, (col, title, cutoff, x) in zip(
         ax.legend(loc="upper right")
     ax.set_xlabel(x)
     ax.set_ylabel("SNP count")
-    ax.set_title(title)
-fig.suptitle(f"DArTseq marker QC — {len(marker_qc):,} SNPs across {len(sample_qc)} AYB lines",
-             y=1.03, fontsize=12)
+axes.ravel()[0].text(-0.18, 1.10, "a", transform=axes.ravel()[0].transAxes,
+                     fontsize=14, fontweight="bold", va="bottom", ha="right")
 save(fig, "fig01_marker_qc")
 print("[fig] fig01_marker_qc")
 
@@ -117,8 +116,9 @@ ax.hist(sample_qc["call_rate"], bins=22, color=WONG["vermillion"],
 ax.axvline(0.90, color="black", ls="--", lw=1.2, label="cutoff = 0.90")
 ax.set_xlabel("Per-sample call rate")
 ax.set_ylabel("Sample count")
-ax.set_title("Sample call rate")
 ax.legend(loc="upper left")
+ax.text(-0.16, 1.06, "b", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 
 ax = axes[1]
 ax.scatter(sample_qc["call_rate"], sample_qc["observed_het"],
@@ -126,8 +126,6 @@ ax.scatter(sample_qc["call_rate"], sample_qc["observed_het"],
            alpha=0.85)
 ax.set_xlabel("Per-sample call rate")
 ax.set_ylabel("Observed heterozygosity")
-ax.set_title("Call rate vs heterozygosity")
-fig.suptitle(f"AYB sample QC — {len(sample_qc)} lines", y=1.05, fontsize=12)
 save(fig, "fig02_sample_qc")
 print("[fig] fig02_sample_qc")
 
@@ -149,7 +147,6 @@ ax2.spines["right"].set_color(WONG["vermillion"])
 ax.set_xticks(xs)
 ax.set_xticklabels(pca_var["PC"])
 ax.set_ylabel("Variance per PC (%)")
-ax.set_title(f"PCA scree — {len(marker_qc[marker_qc['maf'].ge(0.05) & marker_qc['call_rate'].ge(0.90)]):,} QC-filtered SNPs")
 save(fig, "fig03_pca_scree")
 print("[fig] fig03_pca_scree")
 
@@ -161,16 +158,17 @@ fig, ax = plt.subplots(figsize=(5.6, 5.0), constrained_layout=True)
 for k in sorted(pca_coords["cluster"].unique()):
     m = pca_coords["cluster"] == k
     ax.scatter(pca_coords.loc[m, "PC1"], pca_coords.loc[m, "PC2"],
-               s=44, color=CLUSTER_PAL[k], edgecolor="black",
+               s=44, color=CLUSTER_PAL[1 - k], edgecolor="black",
                linewidth=0.5, alpha=0.9,
-               label=f"Cluster {k + 1} (n = {m.sum()})")
+               label=f"Cluster {2 - k} (n = {m.sum()})")
 v1 = pca_var.iloc[0]["variance_explained"] * 100
 v2 = pca_var.iloc[1]["variance_explained"] * 100
 ax.set_xlabel(f"PC1 ({v1:.1f} %)")
 ax.set_ylabel(f"PC2 ({v2:.1f} %)")
-ax.set_title("Genetic-PCA structure of the 105-line AYB panel")
 ax.legend(loc="upper right")
 ax.grid(True)
+ax.text(-0.14, 1.03, "a", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 save(fig, "fig04_pca_clusters")
 print("[fig] fig04_pca_clusters")
 
@@ -179,7 +177,7 @@ print("[fig] fig04_pca_clusters")
 # Fig 5. PCA colored by phenotype (4 panels)
 # ---------------------------------------------------------------------------
 fig, axes = plt.subplots(2, 2, figsize=(7.5, 6.8), constrained_layout=True)
-for ax, trait in zip(axes.ravel(), TRAITS):
+for letter, ax, trait in zip("abcd", axes.ravel(), TRAITS):
     sc = ax.scatter(pca_coords["PC1"], pca_coords["PC2"],
                     c=pca_coords[trait], s=40, cmap="viridis",
                     edgecolor="black", linewidth=0.4)
@@ -188,9 +186,10 @@ for ax, trait in zip(axes.ravel(), TRAITS):
     cb.ax.tick_params(labelsize=8)
     ax.set_xlabel(f"PC1 ({v1:.1f} %)")
     ax.set_ylabel(f"PC2 ({v2:.1f} %)")
-    ax.set_title(trait)
-fig.suptitle("PCA scores coloured by seed-biochemistry trait values",
-             y=1.02, fontsize=12)
+    ax.text(0.14, 1.02, trait, transform=ax.transAxes,
+            ha="left", va="bottom", fontsize=10)
+    ax.text(-0.16, 1.04, letter, transform=ax.transAxes,
+            ha="right", va="bottom", fontsize=13, fontweight="bold")
 save(fig, "fig05_pca_phenotype")
 print("[fig] fig05_pca_phenotype")
 

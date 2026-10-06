@@ -24,3 +24,22 @@ Per-locus H_obs = (het count) / (called samples), H_exp = 2pq (HWE), F_IS = 1 �
   3. Genuine low residual outcrossing in the panel — possible but contradicts the literature.
 - The result matches Shitta et al. 2022 IITA AYB collection (F_IS ≈ 0.01–0.02), suggesting it is a property of the IITA TSs panel rather than our QC choices.
 - Per-accession F has limited interpretive value at this density (the wide range is mostly noise at n = 1,625 markers per accession).
+
+## Revision note — R2-C cluster-label standardisation (2026-09-21)
+
+Reviewer R2-C asked for a single, consistent cluster numbering across the
+paper. The panel PCA (`pca_coords.csv`) originally coded the **main**
+cluster (n = 84) as `cluster == 1` and the **minor** cluster (n = 11) as
+`cluster == 0`. The manuscript standard is now **Cluster 1 = main (n = 84,
+Wong blue)** and **Cluster 2 = minor (n = 11, Wong vermillion)**.
+
+- Change: the plotting cluster field was remapped from `clu + 1` to
+  `2 - clu` (script line ~174), so `cluster == 0` (minor) → 2 and
+  `cluster == 1` (main) → 1.
+- Effect: **`fig57_f_per_accession` only** — the near-clonal trio and the
+  other high-F minor-cluster lines now render **vermillion (Cluster 2)** and
+  the main-cluster bulk **blue (Cluster 1)**, matching Fig 7C and every other
+  cluster-coloured panel in the paper.
+- No statistic changed: global F_IS (0.011), the bootstrap CI, per-locus
+  F_IS, and the per-accession F values are cluster-label-independent. Only
+  the legend/colour assignment moved.

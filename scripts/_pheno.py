@@ -97,6 +97,24 @@ TRAITS_REPLICATED = ["Tannin", "Phenol", "Flavonoid", "Antioxidant",
 TRAITS_MEANS_ONLY = ["Seed_Coat_Tannin", "Total_Oxalate",
                      "Soluble_Oxalate", "Insoluble_Oxalate"]
 
+# Canonical accession-name harmonisation. The wet-chemistry sheets file two
+# accessions under labels that drifted from the genotyped-panel / seed-metrics
+# convention: TSs151 -> TSs151B (a dropped "B") and TSs366 -> TSs336 (a 366<->336
+# digit swap). The drifted and canonical labels never co-occur in any sheet, the
+# Seed_Metrics accession set equals the genotyped panel exactly, and the pairs
+# are near-identical lexically, so these are the same accessions mislabelled
+# between the wet-chemistry and seed-metrics measurement rounds. Harmonise the
+# wet-chemistry labels to the panel label so each accession's wet-chemistry and
+# seed metrics (and its genotype, downstream) join instead of splitting into two
+# half-populated rows.
+SAMPLE_ALIASES = {"TSs151": "TSs151B", "TSs366": "TSs336"}
+
+
+def _canon_samples(s: pd.Series) -> pd.Series:
+    """Strip whitespace and map drifted accession labels to the panel label."""
+    return s.astype(str).str.strip().replace(SAMPLE_ALIASES)
+
+
 TYPO_CORRECTIONS = [
     {"sample": "TSs282", "trait": "Seed_Thickness",
      "raw_value": 63.747, "corrected_value": 6.3747,
@@ -187,7 +205,7 @@ def load_replicates(trait: Optional[str] = None,
     parts = [_wet_reps(), _crude_protein_reps(),
              _moisture_reps(), _seed_metrics_reps()]
     out = pd.concat(parts, ignore_index=True)
-    out["sample"] = out["sample"].astype(str).str.strip()
+    out["sample"] = _canon_samples(out["sample"])
     if apply_corrections:
         for c in REPLICATE_TYPO_CORRECTIONS:
             mask = ((out["sample"] == c["sample"]) &
@@ -236,6 +254,8 @@ def load_means(apply_corrections: bool = True) -> pd.DataFrame:
     wet = _wet_means()
     seed = _seed_metrics_means()
     j46 = _j46_means()
+    for _df in (wet, seed, j46):
+        _df["sample"] = _canon_samples(_df["sample"])
     samples = sorted(set(wet["sample"]) | set(seed["sample"]) | set(j46["sample"]))
     out = pd.DataFrame({"sample": samples})
     out = (out.merge(wet, on="sample", how="left")

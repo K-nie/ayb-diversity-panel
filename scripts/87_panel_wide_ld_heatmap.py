@@ -170,10 +170,9 @@ def build_per_chr_panel(dosage: pd.DataFrame, anc: pd.DataFrame) -> None:
         ax.set_aspect("equal")
         ax.set_ylabel("Pair half-\ndistance (Mb)", fontsize=9)
         ax.set_xlabel(f"{chrom} position (Mb)", fontsize=9.5)
-        ax.set_title(f"{chrom}: n = {len(markers)} anchored markers; "
-                     f"median r$^2$ = {med_r2:.3f}; "
-                     f"95th pct = {p95:.3f}",
-                     fontsize=10, pad=6)
+        ax.text(0.0, 1.02, f"{chrom}: n = {len(markers)} anchored markers; "
+                f"median r$^2$ = {med_r2:.3f}; 95th pct = {p95:.3f}",
+                transform=ax.transAxes, ha="left", va="bottom", fontsize=10)
         publishable_axes(ax, grid=None)
         for nm, pos in CALLOUTS.get(chrom, []):
             ax.axvline(pos / 1e6, color=WONG["vermillion"], lw=0.9,
@@ -195,10 +194,6 @@ def build_per_chr_panel(dosage: pd.DataFrame, anc: pd.DataFrame) -> None:
     cbar = fig.colorbar(sm, ax=axes, fraction=0.018, pad=0.012)
     cbar.set_label(r"pairwise $r^2$")
 
-    fig.suptitle("Panel-wide triangular LD heatmaps across all 11 "
-                  "S. stenocarpa pseudo-chromosomes\n"
-                  "AYB-anchored DArTseq markers, n = 95",
-                  fontsize=12, y=1.005)
     fig.savefig(OUT / "figures/fig_panel_wide_ld_11chrs.png", dpi=300,
                  bbox_inches="tight", facecolor="white")
     fig.savefig(OUT / "figures/fig_panel_wide_ld_11chrs.pdf",
@@ -266,10 +261,6 @@ def build_concatenated_panel(dosage: pd.DataFrame, anc: pd.DataFrame) -> None:
     ax.set_xlabel("Concatenated S. stenocarpa pseudo-chromosomes "
                    "(AYB-anchored markers)")
     ax.set_ylabel("Pair half-distance (Mb)")
-    ax.set_title("Genome-wide triangular LD heatmap across the "
-                  "11 S. stenocarpa pseudo-chromosomes "
-                  "(within-chromosome pairs only)",
-                  fontsize=11)
     publishable_axes(ax, grid=None)
 
     import matplotlib.colors as mcolors

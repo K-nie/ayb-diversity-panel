@@ -52,3 +52,21 @@ AYB-anchored genome span covered by ROH at each threshold.
   direction from autozygosity-call inflation — both biases cancel only
   approximately. Treat F_ROH as a relative-rank ordering, not an
   absolute fraction.
+
+## Revision note — R2-C cluster-label standardisation (2026-09-21)
+
+Reviewer R2-C asked for one consistent cluster numbering across the paper.
+The PCA (`pca_coords.csv`) coded the **main** cluster (n = 84) as
+`cluster == 1` and the **minor** cluster (n = 11) as `cluster == 0`. The
+manuscript standard is now **Cluster 1 = main (n = 84, Wong blue)** and
+**Cluster 2 = minor (n = 11, Wong vermillion)**.
+
+- Change: the plotting cluster field was remapped from
+  `pca["cluster"] + 1` to `2 - pca["cluster"]` (script line ~208).
+- Effect: **`fig74_f_roh_per_sample` only** — the high-F_ROH minor-cluster
+  lines now render **vermillion (Cluster 2)** and the main-cluster lines
+  **blue (Cluster 1)**. `fig73_roh_length_distribution` has no cluster
+  colouring and is unchanged.
+- No statistic changed: the 719 called segments, mean F_ROH (0.256), and the
+  per-cutoff cluster means are cluster-label-independent. Only the
+  legend/colour assignment moved.

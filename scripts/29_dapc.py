@@ -158,11 +158,10 @@ fig, ax = plt.subplots(figsize=(7.5, 4.5), constrained_layout=True)
 for k in sorted(set(clu)):
     pts = LD1[clu == k]
     ax.hist(pts, bins=20, alpha=0.7,
-            color=CLUSTER_PAL[k], edgecolor="white", linewidth=0.4,
-            label=f"Cluster {k + 1} (n = {len(pts)})")
+            color=CLUSTER_PAL[1 - k], edgecolor="white", linewidth=0.4,
+            label=f"Cluster {2 - k} (n = {len(pts)})")
 ax.set_xlabel("DAPC LD1 score")
 ax.set_ylabel("count of samples")
-ax.set_title("DAPC LD1 separating marker-PCA k = 2 clusters")
 ax.legend()
 ax.grid(True, axis="y", alpha=0.4)
 save(fig, "fig67_dapc_density")
@@ -216,9 +215,8 @@ adjust_labels(callout_texts, ax=ax,
 
 ax.set_xticks(mids); ax.set_xticklabels(chrs, fontsize=8)
 ax.set_ylabel("|DAPC LD1 marker loading|")
-ax.set_title(f"DAPC marker contributions to LD1 "
-             f"({len(anc_ok)} AYB-anchored SNPs) -- "
-             f"top-15 markers labelled with nearest named gene")
+ax.text(-0.07, 1.03, "b", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 ax.legend(framealpha=0.9, edgecolor="none")
 publishable_axes(ax, grid="y")
 save(fig, "fig68_dapc_marker_manhattan")

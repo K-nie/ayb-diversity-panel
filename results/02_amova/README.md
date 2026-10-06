@@ -12,9 +12,10 @@ Pairwise squared Euclidean distance D² was computed on the standardised dosage.
 
 ## Quick findings
 
-- **Φ_ST = 0.273** between Cluster 1 (n = 84) and Cluster 2 (n = 11).
-- Pseudo-F = **8.39**, permutation p = **0.001** (both Φ_ST and F).
-- 27.3 % of variance among groups; 72.7 % within groups.
+- **Φ_ST = 0.288** between Cluster 1 (main, n = 84) and Cluster 2 (minor, n = 11).
+- Pseudo-F = **8.86**, permutation p = **0.001** (both Φ_ST and F).
+- 28.8 % of variance among groups; 71.2 % within groups.
+- Values read from `results/02_amova/tables/amova_table.csv` (identical to the deposited `Table1_amova_table.csv`); the earlier 0.273 / 8.39 / 27.3 % figures in this note were stale and predated the current `scripts/02_amova.py` run.
 - AMOVA pie chart was removed at user request — variance components are in the table.
 
 ## Caveats

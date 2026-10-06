@@ -1,0 +1,7 @@
+estimator,n_het,n_total,rate
+trio_per_genotype,16.0,4368.0,0.003663003663003663
+het_in_ROH_minor_cluster,191.0,12587.0,0.015174386271550011
+het_in_ROH_panel,1177.0,39166.0,0.030051575345963335
+main_cluster_FROH_obs_1het,,,0.18714018671436128
+main_cluster_FROH_zerohet,,,0.10946369819012473
+exp_false_hets_per_20SNP_window,,,0.07326007326007326

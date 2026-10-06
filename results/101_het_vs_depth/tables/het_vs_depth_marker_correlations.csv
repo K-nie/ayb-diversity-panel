@@ -1,0 +1,5 @@
+test,rho,p,n
+"het ~ depth (Spearman, all post-QC markers)",0.1432,6.66e-09,1625
+"het ~ RepAvg (Spearman, all post-QC markers)",-0.2052,6.6e-17,1625
+"het ~ AvgCountRef (Spearman, all post-QC markers)",0.0509,0.0404,1625
+"het ~ AvgCountSnp (Spearman, all post-QC markers)",0.293,1.59e-33,1625

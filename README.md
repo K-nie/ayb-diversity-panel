@@ -29,7 +29,7 @@ give the exact command and parameters.
 ## Data
 
 - **Raw DArTseq genotypes** (order DAf18-2580, 105 accessions; post-QC 95 accessions x 1,625
-  markers at sample and marker call rate >= 0.90, MAF >= 0.05): Zenodo [10.5281/zenodo.20348832](https://doi.org/10.5281/zenodo.20348832).
+  markers at sample and marker call rate >= 0.90, MAF >= 0.05): Zenodo [10.5281/zenodo.22867224](https://doi.org/10.5281/zenodo.22867224).
 - **Reference genome**: *S. stenocarpa* chromosome-scale assembly, ENA [PRJEB57813](https://www.ebi.ac.uk/ena/browser/view/PRJEB57813)
   (Shorinola et al. 2024); Funannotate annotation at Zenodo [10.5281/zenodo.13853757](https://doi.org/10.5281/zenodo.13853757).
 - Phenotype data are held by the breeding program and available from the authors on
@@ -37,7 +37,7 @@ give the exact command and parameters.
 
 ## Headline findings
 
-- 89.3% of DArTseq markers re-anchor directly to the *S. stenocarpa* reference (11 pseudo-chromosomes, 649.8 Mb), up from 11.9% under the earlier cowpea proxy.
+- DArTseq markers re-anchor to the *S. stenocarpa* reference (11 pseudo-chromosomes, 649.8 Mb), versus 382 markers (11.9%) under the earlier cowpea proxy. Re-counting placements with multi-hit reporting (not `-max_target_seqs 1`), 81.2% of markers place to a strictly unique locus and 90.2% to a unique best locus (6.2% ambiguous, 3.5% unplaced).
 - A near-clonal trio (TSs151B, TSs358, TSs361; VanRaden G_ij approximately 1.6) is detected and collapsed before downstream diversity and breeding-shortlist steps.
 - Genome-wide LD half-decay approximately 102 kb with an LD-based effective population size N_e approximately 476, refit on the AYB-anchored marker set.
 - F_ROH approximately 0.256 reconciles the otherwise low F_IS, consistent with a predominantly selfing mating system.

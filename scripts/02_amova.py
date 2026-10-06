@@ -257,7 +257,6 @@ ax.axvline(phi_obs, color="#c14a4a", lw=2,
            label=f"Observed $\\Phi_{{ST}}$ = {phi_obs:.3f}")
 ax.set_xlabel(r"$\Phi_{ST}$ under permuted labels")
 ax.set_ylabel("Count")
-ax.set_title(f"Permutation test (B = {N_PERM}); p = {p_value:.3f}")
 ax.legend()
 fig.tight_layout()
 fig.savefig(FIG / "amova_permutation_null.png", dpi=300, bbox_inches="tight")

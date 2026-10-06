@@ -149,10 +149,10 @@ def this_panel_stats() -> dict:
         # Between PCA-derived clusters 1 and 2 from script 10.
         "F_ST_pairwise_low": 0.165,
         "F_ST_pairwise_high": 0.165,
-        # From script 02 AMOVA: Phi_ST = 0.273; among-population fraction =
-        # 100 * Phi_ST = 27.3.
-        "amova_among_pops_pct": 27.3,
-        "amova_within_pops_pct": 72.7,
+        # From script 02 AMOVA (results/02_amova/tables/amova_table.csv):
+        # Phi_ST = 0.2878; among-population fraction = 100 * Phi_ST = 28.8.
+        "amova_among_pops_pct": 28.8,
+        "amova_within_pops_pct": 71.2,
         # From script 09 ADMIXTURE: CV minimum at K=3; K=2 = cleanest
         # visual split. Reported in the manuscript as K=2 / K=3 jointly.
         "admixture_optimal_K": 3,
@@ -257,17 +257,13 @@ def plot_forest(this: dict, out_path: Path) -> None:
 
         ax.set_yticks(range(len(panel_labels)))
         ax.set_yticklabels(panel_labels, fontsize=9)
-        ax.set_title(label, fontsize=10)
+        ax.set_xlabel(label, fontsize=10)
         ax.set_xlim(left=0)
         ax.invert_yaxis()
         ax.grid(axis="x", linewidth=0.4, alpha=0.4)
 
-    fig.suptitle(
-        "Cross-panel placement of headline diversity statistics\n"
-        "(this n=95 panel vs Shitta 2022 n=169 vs Olomitutu 2022 n=195;"
-        " each panel under its own QC)",
-        fontsize=11,
-    )
+    axes[0].text(-0.05, 1.06, "a", transform=axes[0].transAxes,
+                 fontsize=14, fontweight="bold", va="bottom", ha="right")
     fig.text(0.5, 0.01,
              "n.r. = not reported in the source publication. "
              "Olomitutu et al. 2022 (Genes 13:2350) report only mean MAF "
@@ -279,7 +275,7 @@ def plot_forest(this: dict, out_path: Path) -> None:
              "asymmetry, not missing analysis on our side.",
              ha="center", va="bottom", fontsize=7.5, color="grey",
              wrap=True)
-    fig.tight_layout(rect=[0, 0.10, 1, 0.94])
+    fig.tight_layout(rect=[0, 0.10, 1, 0.97])
     fig.savefig(out_path.with_suffix(".png"))
     fig.savefig(out_path.with_suffix(".pdf"))
     plt.close(fig)

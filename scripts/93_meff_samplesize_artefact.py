@@ -178,9 +178,6 @@ def main() -> None:
                 va="top", color=WONG["vermillion"])
     ax.set_xlabel("number of individuals subsampled (n′)")
     ax.set_ylabel(r"effective number of independent tests m$_{eff}$")
-    ax.set_title("m$_{eff}$ tracks sample size, not marker count\n"
-                 f"(full panel n = {n_full}: m$_{{eff}}$ = {meff_full:.0f} ≈ n−1 = {n_full-1})",
-                 fontsize=10)
     ax.legend(loc="lower right", fontsize=8)
     ax.grid(True)
     fig.savefig(FIG / "fig_meff_vs_samplesize.png", dpi=300, bbox_inches="tight")

@@ -281,7 +281,6 @@ def main():
                label=f"observed panel F_ROH = {froh_obs.mean():.3f}")
     ax.set_xlabel("Panel mean F$_{ROH}$")
     ax.set_ylabel("permutations")
-    ax.set_title("Observed autozygosity vs within-locus permutation null")
     ax.legend(fontsize=8)
     fig.savefig(FIG / "fig_roh_permutation_null.png", dpi=300, bbox_inches="tight")
     fig.savefig(FIG / "fig_roh_permutation_null.pdf", bbox_inches="tight")

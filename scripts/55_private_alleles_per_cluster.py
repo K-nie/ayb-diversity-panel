@@ -441,8 +441,8 @@ def plot_fst_manhattan(freqs: pd.DataFrame, fst: np.ndarray,
     ax.set_xticklabels([t[0] for t in ticks])
     ax.set_ylabel(r"Per-locus Hudson F$_{ST}$ (Cluster 1 vs Cluster 2)")
     ax.set_xlabel("S. stenocarpa pseudo-chromosome (AYB-anchored markers)")
-    ax.set_title(r"Per-locus Hudson F$_{ST}$ across AYB-anchored markers; "
-                 "Ss05 highlighted with top-10 nearest-gene callouts")
+    ax.text(-0.06, 1.03, "d", transform=ax.transAxes,
+            fontsize=14, fontweight="bold", va="bottom", ha="right")
     publishable_axes(ax, grid="y")
     fig.savefig(out_path.with_suffix(".png"), dpi=300, bbox_inches="tight")
     fig.savefig(out_path.with_suffix(".pdf"), bbox_inches="tight")
@@ -493,7 +493,8 @@ def plot_ss05_attribution_strip(ss05: pd.DataFrame, out_path: Path) -> None:
     ax.set_ylim(-0.02, 1.02)
     ax.set_xlabel("Freq of panel-wide minor allele in Cluster 1 (n = 84)")
     ax.set_ylabel("Freq of panel-wide minor allele in Cluster 2 (n = 11)")
-    ax.set_title("Ss05 outlier attribution: PCAdapt + DAPC top-50 hits on Ss05")
+    ax.text(-0.10, 1.03, "c", transform=ax.transAxes,
+            fontsize=14, fontweight="bold", va="bottom", ha="right")
     ax.legend(loc="lower right", fontsize=8, framealpha=0.95)
     fig.tight_layout()
     fig.savefig(out_path.with_suffix(".png"))

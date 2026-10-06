@@ -138,8 +138,6 @@ def main() -> None:
     ax.axvline(half_bp / 1e3, color="0.5", linestyle="--", linewidth=0.8)
     ax.set_xlabel("physical distance (kb)")
     ax.set_ylabel(r"r$^2$")
-    ax.set_title(f"Genome-wide LD decay across AYB-anchored markers "
-                 f"({n_pairs:,} pairs, Ss01–Ss11)")
     ax.set_xlim(0, MAX_DIST_BP / 1e3)
     ax.set_ylim(0, max(0.3, float(binned["mean"].max()) * 1.15))
     ax.legend(loc="upper right", fontsize=8)

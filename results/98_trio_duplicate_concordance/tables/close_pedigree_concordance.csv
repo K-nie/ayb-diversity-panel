@@ -1,0 +1,6 @@
+pair,n_called,n_identical,pct_identical,n_discordant,n_disc_het_vs_hom,n_disc_opposite_hom
+TSs361-TSs357,1613,1183,73.342,430,426,4
+TSs156A-TSs363,1613,1406,87.167,207,27,180
+TSs357-TSs358,1613,1183,73.342,430,425,5
+TSs151B-TSs357,1615,1181,73.127,434,430,4
+TSs60-TSs282,1601,1170,73.079,431,430,1

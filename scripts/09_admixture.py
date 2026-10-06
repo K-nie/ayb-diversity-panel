@@ -229,7 +229,6 @@ ax.axvline(best_K, ls="--", color=WONG["vermillion"],
            label=f"best K = {best_K}")
 ax.set_xlabel("K (number of ancestral populations)")
 ax.set_ylabel(f"{CV_FOLDS}-fold CV error")
-ax.set_title("ADMIXTURE cross-validation error vs K")
 ax.set_xticks(K_LIST)
 ax.grid(True)
 ax.legend()
@@ -237,7 +236,7 @@ save(fig, "fig22_admixture_cv_error")
 print("[fig] fig22_admixture_cv_error")
 
 
-def plot_Q(ax, Q, sample_order, title=None):
+def plot_Q(ax, Q, sample_order, klabel=None):
     n, K = Q.shape
     Q = Q[sample_order]
     bottoms = np.zeros(n)
@@ -250,8 +249,10 @@ def plot_Q(ax, Q, sample_order, title=None):
     ax.set_ylim(0, 1)
     ax.set_xticks([])
     ax.set_ylabel("ancestry")
-    if title:
-        ax.set_title(title)
+    # per-K label as a bold top-left annotation, NOT an in-figure title
+    if klabel:
+        ax.text(0.0, 1.04, klabel, transform=ax.transAxes,
+                fontsize=10, fontweight="bold", va="bottom", ha="left")
     for spine in ("top", "right"):
         ax.spines[spine].set_visible(False)
 
@@ -278,14 +279,13 @@ Q_df.to_csv(TAB / f"admixture_Q_K{best_K}.csv")
 
 fig, ax = plt.subplots(figsize=(11, 3.0), constrained_layout=True)
 order = sample_order_for_K(Q_best)
-plot_Q(ax, Q_best, order,
-       title=f"ADMIXTURE Q matrix, K = {best_K} (best by {CV_FOLDS}-fold CV)")
+plot_Q(ax, Q_best, order, klabel=f"K = {best_K}")
 # annotate cluster-boundary tick
 labels = pca_cluster[order]
 boundary = np.where(np.diff(labels) != 0)[0]
 for b in boundary:
     ax.axvline(b + 0.5, color="black", linewidth=1.2)
-ax.set_xlabel(f"105 AYB lines, ordered by PCA cluster then by Q dominance")
+ax.set_xlabel(f"{len(samples)} AYB lines, ordered by PCA cluster then by Q dominance")
 save(fig, f"fig23_admixture_Q_bars_K{best_K}")
 print(f"[fig] fig23_admixture_Q_bars_K{best_K}")
 
@@ -296,14 +296,15 @@ fig, axes = plt.subplots(len(K_LIST), 1, figsize=(11, 1.7 * len(K_LIST)),
 for ax, K in zip(axes, K_LIST):
     Q = load_Q(K)
     order = sample_order_for_K(Q)
-    plot_Q(ax, Q, order, title=f"K = {K}")
+    plot_Q(ax, Q, order, klabel=f"K = {K}")
     labels = pca_cluster[order]
     boundary = np.where(np.diff(labels) != 0)[0]
     for b in boundary:
         ax.axvline(b + 0.5, color="black", linewidth=1.0)
-axes[-1].set_xlabel("105 AYB lines (per-K ordering shown)")
-fig.suptitle(f"ADMIXTURE Q matrices, K = {K_LIST[0]}..{K_LIST[-1]}",
-             y=1.02, fontsize=12)
+axes[-1].set_xlabel(f"{len(samples)} AYB lines (per-K ordering shown)")
+# composite-panel letter (Figure 2b) — bold lowercase, no in-figure title
+axes[0].text(-0.06, 1.28, "b", transform=axes[0].transAxes,
+             fontsize=14, fontweight="bold", va="top", ha="left")
 save(fig, "fig24_admixture_Q_bars_all_K")
 print("[fig] fig24_admixture_Q_bars_all_K")
 

@@ -162,14 +162,15 @@ chrs = sorted(anc_ok["chr_ayb"].unique(),
               key=lambda s: int(re.search(r"\d+", s).group()))
 fig, ax = plt.subplots(figsize=(11, 4.0), constrained_layout=True)
 offsets, mids, x_cursor = {}, [], 0
-xs = []
 for c in chrs:
     sub = anc_ok[anc_ok["chr_ayb"] == c]
     offsets[c] = x_cursor
-    xs.extend((sub["pos"].values + x_cursor).tolist())
-    mids.append(x_cursor + (sub["pos"].max() - sub["pos"].min()) / 2)
+    mids.append(x_cursor + (sub["pos"].min() + sub["pos"].max()) / 2)
     x_cursor += sub["pos"].max() + 5_000_000
-anc_ok["x"] = xs
+# Map each SNP to its genome-wide x by chromosome offset so points and gene
+# callouts land on the chromosome they actually belong to. Assigning a
+# chromosome-grouped list back onto original-order rows misaligns them.
+anc_ok["x"] = anc_ok["pos"] + anc_ok["chr_ayb"].map(offsets)
 palette = [WONG["blue"], "#7c7c7c"]
 for i, c in enumerate(chrs):
     sub = anc_ok[anc_ok["chr_ayb"] == c]
@@ -209,8 +210,8 @@ adjust_labels(callout_texts, ax=ax,
 
 ax.set_xticks(mids); ax.set_xticklabels(chrs, fontsize=8)
 ax.set_ylabel(r"$-\log_{10}\,p$" "\n(PCAdapt Mahalanobis$^2$)")
-ax.set_title(f"PCAdapt-style F$_{{ST}}$ outlier scan, K = {N_PCs} PCs -- "
-              f"top-15 outliers labelled with nearest named gene")
+ax.text(-0.07, 1.03, "a", transform=ax.transAxes,
+        fontsize=14, fontweight="bold", va="bottom", ha="right")
 ax.legend(loc="upper right", fontsize=8, framealpha=0.9, edgecolor="none")
 publishable_axes(ax, grid="y")
 save(fig, "fig64_pcadapt_manhattan")
@@ -235,9 +236,6 @@ hi = -np.log10(stats.beta.ppf(0.025, k, n - k + 1))
 ax.fill_between(expected, lo, hi, color="grey", alpha=0.18, linewidth=0)
 ax.set_xlabel(r"Expected $-\log_{10}\,p$")
 ax.set_ylabel(r"Observed $-\log_{10}\,p$")
-lambda_gc = float(np.median(mahal) / stats.chi2.ppf(0.5, df=N_PCs))
-ax.set_title(f"PCAdapt QQ — n = {n} markers; "
-             f"$\\lambda$$_{{GC}}$ = {lambda_gc:.2f}", fontsize=11)
 ax.grid(True, alpha=0.4)
 save(fig, "fig65_pcadapt_qq")
 print("[fig] fig65_pcadapt_qq")

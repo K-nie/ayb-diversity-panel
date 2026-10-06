@@ -204,12 +204,19 @@ def mean_impute(dosage: pd.DataFrame) -> pd.DataFrame:
 
 def pca_silhouette(dosage: pd.DataFrame, k: int = 2) -> tuple[float, np.ndarray, np.ndarray, np.ndarray]:
     """PCA on standardised dosage; K-means at k clusters; return silhouette
-    score, PC1, PC2, cluster labels (per-sample order = dosage.columns)."""
+    score, PC1, PC2, cluster labels (per-sample order = dosage.columns).
+
+    K-means and the silhouette are computed on the leading five PCs, matching
+    the canonical PCA pipeline (script 01 `01_qc_pca_power.py`) so the 95-line
+    baseline reproduces the manuscript headline silhouette exactly rather than
+    the inflated PC1-2-only value.
+    """
     X = mean_impute(dosage).T.values  # samples x markers
     X = StandardScaler().fit_transform(X)
-    pcs = PCA(n_components=2, random_state=0).fit_transform(X)
-    labels = KMeans(n_clusters=k, n_init=20, random_state=0).fit_predict(pcs)
-    sil = silhouette_score(pcs, labels)
+    pcs = PCA(n_components=min(10, X.shape[0] - 1, X.shape[1]),
+              random_state=0).fit_transform(X)
+    labels = KMeans(n_clusters=k, n_init=25, random_state=0).fit_predict(pcs[:, :5])
+    sil = silhouette_score(pcs[:, :5], labels)
     return float(sil), pcs[:, 0], pcs[:, 1], labels
 
 
@@ -239,69 +246,51 @@ def li_ji_meff(dosage: pd.DataFrame) -> int:
 
 
 def weir_cockerham_fst(dosage: pd.DataFrame, labels: np.ndarray) -> float:
-    """Per-locus W-C F_ST averaged via ratio-of-sums.
+    """Global Weir & Cockerham (1984) F_ST (ratio of sums) between clusters.
 
-    dosage : marker x sample (post-imputation)
+    Uses the full three-component estimator including the observed-heterozygote
+    term, computed on the raw (non-imputed) dosage with native missing-data
+    handling, identical to the canonical F_ST script (`10_fst.py`). This makes
+    the 95-line baseline reproduce the manuscript headline W&C F_ST rather than
+    the inbred-line-simplified value the earlier version returned.
+
+    dosage : marker x sample (may contain NaN)
     labels : per-sample cluster assignment in dosage.columns order
     """
-    X = mean_impute(dosage).values  # marker x sample
-    sample_idx = {s: i for i, s in enumerate(dosage.columns)}
-    n_total = X.shape[1]
-
-    pop_idx = {}
-    for label in np.unique(labels):
-        pop_idx[label] = np.where(labels == label)[0]
-
-    if len(pop_idx) < 2:
+    M_ = dosage.values  # marker x sample, NaN preserved
+    grp_ = np.asarray(labels)
+    pops = sorted(set(grp_.tolist()))
+    r = len(pops)
+    if r < 2:
         return float("nan")
-
-    pop_keys = list(pop_idx.keys())
-    a_sum, b_sum, c_sum = 0.0, 0.0, 0.0
-
-    for snp in range(X.shape[0]):
-        row = X[snp]
-        # Per-population allele frequency = mean dosage / 2.
-        n_pops, p_pops = [], []
-        for k in pop_keys:
-            idx = pop_idx[k]
-            vals = row[idx]
-            if len(vals) == 0:
-                continue
-            n_k = len(vals)
-            p_k = float(np.mean(vals)) / 2.0
-            n_pops.append(n_k)
-            p_pops.append(p_k)
-        if len(p_pops) < 2:
-            continue
-
-        n_pops = np.asarray(n_pops, dtype=float)
-        p_pops = np.asarray(p_pops, dtype=float)
-        r = len(p_pops)
-        n_bar = float(np.mean(n_pops))
-        if n_bar < 1e-9 or r < 2:
-            continue
-
-        # Sample variance of per-pop p (with r-1 denominator), per Weir-Cockerham.
-        p_bar = float(np.sum(n_pops * p_pops) / np.sum(n_pops))
-        s2 = float(np.sum(n_pops * (p_pops - p_bar) ** 2)
-                   / ((r - 1) * n_bar))
-        n_c = (np.sum(n_pops) - np.sum(n_pops ** 2) / np.sum(n_pops)) / (r - 1)
-
-        # Assume H_obs ~ 0 because the panel is autogamous; the bias term
-        # vanishes for inbred lines and the formula collapses to a clean
-        # variance-component ratio. This is the standard simplification for
-        # selfer plant panels (Bradbury et al. 2007).
-        a = (n_bar / n_c) * (s2 - (1.0 / (n_bar - 1.0))
-                             * (p_bar * (1 - p_bar) - ((r - 1) / r) * s2))
-        b = (n_bar / (n_bar - 1.0)) * (p_bar * (1 - p_bar)
-                                       - ((r - 1) / r) * s2 - 0.25 * a)
-        c = 0.0  # H_obs / 2 contribution, dropped under the inbred assumption.
-        a_sum += a
-        b_sum += b
-        c_sum += c
-
-    denom = a_sum + b_sum + c_sum
-    return float(a_sum / denom) if denom != 0 else float("nan")
+    L = M_.shape[0]
+    n_i = np.zeros((r, L)); p_i = np.zeros((r, L)); h_i = np.zeros((r, L))
+    for ki, k in enumerate(pops):
+        sub = M_[:, np.where(grp_ == k)[0]]
+        nm = ~np.isnan(sub)
+        n_i[ki] = nm.sum(axis=1)
+        with np.errstate(invalid="ignore", divide="ignore"):
+            p_i[ki] = np.nansum(sub, axis=1) / (2.0 * n_i[ki])
+            h_i[ki] = (sub == 1).sum(axis=1) / n_i[ki]
+    n_tot = n_i.sum(axis=0)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        n_bar = n_tot / r
+        p_bar = (n_i * p_i).sum(axis=0) / n_tot
+        S2 = (1.0 / ((r - 1) * n_bar)) * (n_i * (p_i - p_bar) ** 2).sum(axis=0)
+        h_bar = (n_i * h_i).sum(axis=0) / n_tot
+        n_c = (n_tot - (n_i ** 2).sum(axis=0) / n_tot) / (r - 1)
+        common = p_bar * (1.0 - p_bar) - ((r - 1) / r) * S2 - h_bar / 4.0
+        a = (n_bar / n_c) * (S2 - (1.0 / (n_bar - 1)) * common)
+        b = (n_bar / (n_bar - 1)) * (
+            p_bar * (1.0 - p_bar) - ((r - 1) / r) * S2
+            - ((2 * n_bar - 1) / (4 * n_bar)) * h_bar
+        )
+        c = h_bar / 2.0
+    denom = a + b + c
+    valid = np.isfinite(denom) & (denom > 0)
+    if not valid.any():
+        return float("nan")
+    return float(np.nansum(a[valid]) / np.nansum(denom[valid]))
 
 
 # ---------------------------------------------------------------------------
@@ -349,7 +338,8 @@ def plot_delta_forest(deltas: pd.DataFrame, out_path: Path) -> None:
     ax.set_yticks(y)
     ax.set_yticklabels(deltas["stat"])
     ax.set_xlabel("Percent change after dropping duplicate representatives")
-    ax.set_title("De-duplication sensitivity on panel-level statistics")
+    ax.text(-0.14, 1.04, "c", transform=ax.transAxes,
+            fontsize=14, fontweight="bold", va="bottom", ha="right")
     fig.tight_layout()
     fig.savefig(out_path.with_suffix(".png"))
     fig.savefig(out_path.with_suffix(".pdf"))
@@ -387,7 +377,8 @@ def plot_pca_overlay(stats_95: dict, dropped: list[str], samples_95: list[str],
                linewidth=1.6, label=f"dropped duplicate (n = {is_dropped.sum()})")
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
-    ax.set_title("PC1 x PC2 with duplicate accessions marked for drop")
+    ax.text(-0.10, 1.03, "d", transform=ax.transAxes,
+            fontsize=14, fontweight="bold", va="bottom", ha="right")
     ax.legend(loc="best")
     fig.tight_layout()
     fig.savefig(out_path.with_suffix(".png"))
@@ -455,7 +446,14 @@ def main() -> None:
     print(delta_df.to_string(index=False))
 
     print("\n[plot] rendering delta forest")
-    plot_delta_forest(delta_df, FIG / "fig_dedup_delta_forest")
+    # m_eff here is the Li & Ji count on the n x n sample Gram of this
+    # subset; it is a GWAS multiple-testing quantity, not a population-
+    # structure statistic, and it differs from the full-panel GWAS m_eff
+    # reported in Methods (script 12, m_eff = 93). It stays in the backing
+    # CSV as a record but is omitted from this structure-robustness forest
+    # so the figure cannot be misread as a second, conflicting m_eff.
+    forest_df = delta_df[delta_df["stat"] != "m_eff"].reset_index(drop=True)
+    plot_delta_forest(forest_df, FIG / "fig_dedup_delta_forest")
 
     print("[plot] rendering PCA overlay")
     plot_pca_overlay(stats_95, dropped, samples_95, FIG / "fig_pca_overlay")

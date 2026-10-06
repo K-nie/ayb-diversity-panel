@@ -1,0 +1,4 @@
+pair,n_called,n_identical,n_discordant,n_het_vs_hom,n_opp_hom
+TSs151B-TSs358,1464,1449,15,15,0
+TSs151B-TSs361,1464,1447,17,17,0
+TSs358-TSs361,1462,1455,7,6,1

@@ -314,7 +314,8 @@ def plot_silicoDArT_pca(pc_df: pd.DataFrame, snp_cluster: dict[str, int],
                      label=f"{name} (retained n = {len(sub)})")
     ax_a.set_xlabel("SilicoDArT PC1")
     ax_a.set_ylabel("SilicoDArT PC2")
-    ax_a.set_title("SilicoDArT PCA coloured by SNP-layer cluster")
+    ax_a.text(-0.12, 1.03, "b", transform=ax_a.transAxes,
+              fontsize=14, fontweight="bold", va="bottom", ha="right")
     ax_a.legend(loc="best")
 
     # Panel B: coloured by SilicoDArT's own K-means k=2.
@@ -329,7 +330,6 @@ def plot_silicoDArT_pca(pc_df: pd.DataFrame, snp_cluster: dict[str, int],
                      edgecolor="white", linewidth=0.5, label=name)
     ax_b.set_xlabel("SilicoDArT PC1")
     ax_b.set_ylabel("SilicoDArT PC2")
-    ax_b.set_title("SilicoDArT PCA coloured by its own K=2 K-means")
     ax_b.legend(loc="best")
 
     fig.tight_layout()
@@ -349,8 +349,8 @@ def plot_cross_layer_ibs(snp_ibs: np.ndarray, silico_ibs: np.ndarray,
     ax.plot([lo, hi], [lo, hi], color="grey", linestyle="--", linewidth=0.7)
     ax.set_xlabel("Pairwise IBS distance on SNP layer (1,625 markers)")
     ax.set_ylabel("Pairwise IBS distance on SilicoDArT layer")
-    ax.set_title(f"Cross-marker-system pairwise IBS concordance\n"
-                 f"Pearson r = {r:.3f} across all {n_samples}*{n_samples - 1}/2 = {n_pairs:,} pairs")
+    ax.text(-0.10, 1.03, "c", transform=ax.transAxes,
+            fontsize=14, fontweight="bold", va="bottom", ha="right")
     fig.tight_layout()
     fig.savefig(out_path.with_suffix(".png"))
     fig.savefig(out_path.with_suffix(".pdf"))

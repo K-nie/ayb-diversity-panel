@@ -202,9 +202,6 @@ def main() -> None:
                label=f"submitted least-related cutoff (G ≤ {sub['G_ij'].max():.2f})")
     ax.set_xlabel(r"raw VanRaden G$_{ij}$ (submitted ranking axis)")
     ax.set_ylabel(r"inbreeding-normalized relatedness r$_{ij}$ = G$_{ij}$/$\sqrt{G_{ii}G_{jj}}$")
-    ax.set_title("Cross-pair relatedness: raw G$_{ij}$ vs inbreeding-normalized r$_{ij}$\n"
-                 f"{sub_with_trio}/{TOP_N_PAIRS} submitted least-related pairs "
-                 f"involve the inbred trio", fontsize=10)
     ax.legend(loc="lower right", fontsize=8)
     ax.grid(True)
     fig.savefig(FIG / "fig_cross_shortlist_rawG_vs_normalized.png", dpi=300, bbox_inches="tight")

@@ -1,0 +1,16 @@
+metric,value
+SNP-markers (rs),3204.0
+unique DArT clones,3100.0
+uniquely placed (1 locus),2603.0
+uniquely placed pct of all,81.2
+confidently placed (1 locus OR clear best),2891.0
+confidently placed pct of all,90.2
+multi-mapping (>=2 loci),488.0
+multi-mapping pct of all,15.2
+genuinely ambiguous (>=2 near-equal loci),200.0
+genuinely ambiguous pct of all,6.2
+unplaced (0 hits),113.0
+unique pct of placed,84.2
+unique-marker median het,0.1143
+multi-marker median het,0.0476
+MWU multi>unique het p,0.9999999999999999
