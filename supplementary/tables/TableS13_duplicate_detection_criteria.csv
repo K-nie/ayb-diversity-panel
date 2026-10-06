@@ -1,0 +1,9 @@
+pair,category,n_called,n_identical,pct_identical,n_discordant,n_disc_het_vs_hom,n_disc_opposite_hom,G_ij,G_ii,G_jj,norm_rel
+TSs151B-TSs358,near-clonal trio,1613,1598,99.07,15,15,0,1.5996,1.6137,1.6183,0.9898
+TSs151B-TSs361,near-clonal trio,1613,1596,98.946,17,17,0,1.5998,1.6137,1.6226,0.9887
+TSs358-TSs361,near-clonal trio,1611,1604,99.565,7,6,1,1.6095,1.6183,1.6226,0.9932
+TSs361-TSs357,close-pedigree,1613,1183,73.342,430,426,4,0.8232,1.6226,0.8926,0.684
+TSs156A-TSs363,close-pedigree,1613,1406,87.167,207,27,180,0.8212,1.5279,1.5891,0.527
+TSs357-TSs358,close-pedigree,1613,1183,73.342,430,425,5,0.8179,0.8926,1.6183,0.6805
+TSs151B-TSs357,close-pedigree,1615,1181,73.127,434,430,4,0.8141,1.6137,0.8926,0.6783
+TSs60-TSs282,close-pedigree,1601,1170,73.079,431,430,1,0.8081,0.8697,1.6088,0.6831

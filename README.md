@@ -9,10 +9,11 @@ manuscript drafts are not included.
 ## Repository layout
 
 ```
-scripts/    numbered Python and R analysis scripts (shared helpers: _plotstyle, _pheno, _figstyle)
-results/    one directory per analysis stage, each with tables/ and a README.md
-            documenting method, inputs, outputs, findings, and caveats
-refs/       machine-learning best-practice reference material
+scripts/        numbered Python and R analysis scripts (shared helpers: _plotstyle, _pheno, _figstyle)
+results/        one directory per analysis stage, each with tables/ and a README.md
+                documenting method, inputs, outputs, findings, and caveats
+supplementary/  manuscript Supplementary Tables (S1–S15) and Figures, numbered as in the SI
+refs/           machine-learning best-practice reference material
 ```
 
 Each `results/<NN>_*/README.md` is the reproducibility and methods record for that
