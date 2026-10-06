@@ -1,4 +1,5 @@
-# Supplementary figure images live on GitHub but are excluded from the
-# `git archive` Zenodo tarball (the Zenodo deposit carries code + results +
-# supplementary tables only; figures are served from GitHub).
+# Figure images live on GitHub but are excluded from the `git archive` Zenodo
+# tarball (the Zenodo deposit carries code + results + tables only; figures are
+# served from GitHub).
+main/figures/ export-ignore
 supplementary/figures/ export-ignore

@@ -12,6 +12,7 @@ manuscript drafts are not included.
 scripts/        numbered Python and R analysis scripts (shared helpers: _plotstyle, _pheno, _figstyle)
 results/        one directory per analysis stage, each with tables/ and a README.md
                 documenting method, inputs, outputs, findings, and caveats
+main/           manuscript main-text tables and figures, numbered as in the paper
 supplementary/  manuscript Supplementary Tables (S1–S15) and Figures, numbered as in the SI
 refs/           machine-learning best-practice reference material
 ```
