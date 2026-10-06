@@ -46,7 +46,7 @@ give the exact command and parameters.
 ## Citation
 
 If you use this code or its outputs, please cite this repository (see `CITATION.cff`)
-and the accompanying manuscript.
+and the accompanying manuscript; Narh-Madey et al., 2026.
 
 ## License
 
